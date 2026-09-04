@@ -1,0 +1,4 @@
+agent: claude
+task: 1
+started: 2026-08-15T14:00:00Z
+session: fixture-session

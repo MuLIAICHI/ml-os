@@ -1,0 +1,33 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+.DS_Store
+.claude/pin-guard.ok
+
+# Private to this machine — the tracked template is config.example.toml.
+/config.toml
+# Internal working spec (public architecture doc: docs/ARCHITECTURE.md).
+/docs/specs/
+# Maintainer-local agent instructions.
+CLAUDE.local.md
+
+# ay-framework (build engine — not part of the deliverable).
+# Root-anchored: ignore THIS repo's operational .ay/, but NOT fixture .ay/ trees
+# under fixtures/ (those are golden test data and must be committed).
+/.ay/
+/Human/
+/lifecycle-demo.html
+/orchestration-demo.html
+/nul
+.claude/CLAUDE-*.md
+.claude/commands/
+.claude/agents/
+.claude/skills/
+.claude/hooks/
+.claude/settings.json
+
+# ay-framework
+.ay/locks/
+.ay/sessions/

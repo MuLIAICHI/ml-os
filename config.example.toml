@@ -1,0 +1,41 @@
+# ml-os — the single config file.
+# Copy to config.toml and edit. Every path lives here; a hardcoded path
+# anywhere in the code is a bug.
+#
+# NOTE (TOML): top-level bare keys must appear BEFORE any [table] header,
+# or TOML assigns them to that table. Keep them at the top.
+
+poll_interval_seconds = 5   # watcher poll cadence
+
+[server]
+# Default is loopback-only. The viewer is unauthenticated and /api/jump runs a
+# configured local command, so only bind 0.0.0.0 (e.g. to open the page from a
+# phone on your LAN) if you trust every device on that network.
+host = "127.0.0.1"
+port = 8787
+
+[gates]
+stale_threshold_minutes = 30    # a pending gate older than this is visually escalated
+inference_window_minutes = 10   # unpatched repo: a lock held longer than this => inferred gate
+
+# Registered repos. Adding a project is one [[repos]] block.
+[[repos]]
+name = "my-project"
+path = "~/code/my-project"
+
+[[repos]]
+name = "another-project"
+path = "~/code/another-project"
+
+[session_manager]
+# kind = "cmux": jump resolves the live workspace (cmux workspace list --json ->
+#   match current_directory -> cmux workspace select <ref>), falling back to `cmux <path>`.
+# kind = "command": run focus_command (argv; {path}/{repo} substituted, no shell).
+kind = "cmux"
+focus_command = ["open", "myapp://workspace/{repo}"]  # only used when kind = "command"
+
+[notifier]
+backend = "terminal-notifier"          # "osascript" | "terminal-notifier"
+state_file = "~/.ml-os/notified.json"  # ml-os's own last-notified state; never inside a watched repo
+open_url = "http://localhost:8787"     # click on a notification opens the Gate Inbox
+                                       # (osascript backend can't do this: clicks land in Script Editor)

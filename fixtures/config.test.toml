@@ -1,0 +1,39 @@
+# Test config for ml-os — points at the golden fixture repos in this directory.
+# Paths are relative and resolve against this file's directory (see mlos.config._resolve).
+
+vault = "."
+poll_interval_seconds = 1   # fast poll for tests/manual validate
+
+[server]
+host = "127.0.0.1"   # tests use loopback, not the LAN bind
+port = 0             # 0 = let the OS pick an ephemeral port in tests
+
+[gates]
+stale_threshold_minutes = 30
+inference_window_minutes = 10
+
+[[repos]]
+name = "alpha"
+path = "repo_alpha"
+
+[[repos]]
+name = "beta"
+path = "repo_beta"
+
+[[repos]]
+name = "gamma"
+path = "repo_gamma"
+
+[[repos]]
+name = "delta"
+path = "repo_delta"   # a registered repo with NO .ay/ → "not initialized"
+
+[session_manager]
+# Tests use the "command" kind with a harmless echo so server tests never invoke real cmux.
+# (The cmux resolve/select strategy is unit-tested in test_jump.py with an injected runner.)
+kind = "command"
+focus_command = ["echo", "focus", "{repo}", "{path}"]
+
+[notifier]
+backend = "osascript"
+state_file = "notified.test.json"   # relative → resolves under fixtures/; tests override to a tmpdir

@@ -1,0 +1,6 @@
+// BOARD.jsonl -- append-only event log (fixture)
+{"ts":"2026-08-16T09:00:00Z","task_id":"1","title":"Set up auth","agent":"claude","status":"in_progress"}
+{"ts":"2026-08-16T09:30:00Z","task_id":"1","title":"Set up auth","agent":"claude","status":"done","commit":"aaa1111"}
+this is not json and must be skipped
+{"ts":"2026-08-16T10:30:00Z","task_id":"4","title":"Ship it","agent":"claude","status":"done","commit":"ddd4444"}
+{"ts":"2026-08-16T11:00:00Z","task_id":"2","title":"Build API","agent":"claude","status":"ready"}
