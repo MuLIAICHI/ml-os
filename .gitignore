@@ -8,6 +8,8 @@ __pycache__/
 
 # Private to this machine — the tracked template is config.example.toml.
 /config.toml
+/config.*.toml
+!/config.example.toml
 # Internal working spec (public architecture doc: docs/ARCHITECTURE.md).
 /docs/specs/
 # Maintainer-local agent instructions.
